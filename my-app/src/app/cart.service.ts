@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,8 @@ export class CartService {
 
   items = [];
 
-  addToCart(product) {
-    this.items.push(product);
+  addToCart(item) {
+    this.items.push(item);
   }
 
   getItems() {
@@ -23,7 +23,7 @@ export class CartService {
   }
 
 constructor(
-  private http: HttpClient
+  // private http: HttpClient
 ) { }
 
 }

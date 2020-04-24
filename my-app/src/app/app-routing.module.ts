@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'sellerSignup', component: SellerSignupComponent},
   { path: 'search', component: SearchComponent},
   { path: 'searchResult', component: SearchResultComponent},
-  { path: 'itemDetail', component: ItemDetailComponent},
+  { path: 'items/:itemId', component: ItemDetailComponent},
   { path: 'cart', component: CartComponent},
   { path: 'purchaseHistory', component: PurchaseHistoryComponent},
   { path: 'itemAdd', component: ItemAddComponent},
@@ -27,7 +27,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+   imports: [
+      RouterModule.forRoot(routes)
+   ],
+   exports: [
+      RouterModule
+   ],
+   declarations: [
+   ]
 })
 export class AppRoutingModule { }
