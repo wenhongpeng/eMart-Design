@@ -1,18 +1,20 @@
 <div class="div-signin">
-  <form class="form-signin" novalidate>
+  <form class="form-signin" (ngSubmit)="onSubmit()" novalidate>
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 
-    <!-- #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)" -->
     <!-- <p *ngFor="let alert of alerts">
       <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
-    </p> -->
-    
+    </p> 
+  #myForm="ngForm"
+  myForm.value
+-->
+
     <!-- bootstrap utilities/screenreaders   -->
-    <span><input type="radio" name="userType" id="buyerType" ng-value="1" ng-model="userType" ng-checked="true">Buyer</span>
+    <span><input type="radio" ngModel name="userType" id="buyerType" ng-value="1" ng-model="userType" ng-checked="true">Buyer</span>
     <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-    <span><input type="radio" name="userType" id="sellerType" ng-value="2" ng-model="userType">Seller</span>
+    <span><input type="radio" ngModel name="userType" id="sellerType" ng-value="2" ng-model="userType">Seller</span>
     <label for="inputUsername" class="sr-only">User name</label>
-    <input ngModel name="name" id="inputUsername" class="form-control" placeholder="UserName" type="text">
+    <input ngModel name="username" id="inputUsername" class="form-control" placeholder="UserName" type="text">
 
     <label for="inputPassword" class="sr-only">Password</label>
     <input ngModel name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" >
