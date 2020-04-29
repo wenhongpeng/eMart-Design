@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,8 @@ import { ItemAddComponent } from './itemAdd/itemAdd.component';
 import { ViewstockComponent } from './viewstock/viewstock.component';
 import { ReportComponent } from './report/report.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {JwtInterceptor} from './interceptor/jwt.interceptor';
 
 @NgModule({
    declarations: [
@@ -35,9 +38,14 @@ import { TopBarComponent } from './top-bar/top-bar.component';
    ],
    imports: [
       BrowserModule,
-      AppRoutingModule
+      AppRoutingModule,
+      HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule
    ],
-   providers: [],
+   providers: [
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+   ],
    bootstrap: [
       AppComponent
    ]
