@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 interface Alert {
   type: string;
@@ -18,16 +19,11 @@ export class LoginComponent implements OnInit {
   alerts: Alert[];
   signinForm;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService:UserService) { }
 
   ngOnInit() {
   }
 
-  /* Sign In */
-  // onSubmit() {
-  //    console.log('Sign In Success');
-  //    this.router.navigate(['/search']);
-  // }
   onSubmit(value: any) {
     if (this.validInput(value)) {
   //     // this.userService.postSignIn(value).subscribe(
@@ -41,7 +37,6 @@ export class LoginComponent implements OnInit {
   //     //     } else {
   //     //       console.log('Sign in ');
   //     //       this.alerts.push({type : 'danger', message: 'username or password error!'});
-
   //     //     }
   //     //   }
   //     // );

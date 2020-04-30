@@ -1,5 +1,5 @@
 <div style="padding: 100px 100px;">
-  <form class="bs-example bs-example-form" role="form" novalidate>
+  <form class="bs-example bs-example-form" #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)" role="form" novalidate>
     <h1 class="h3 mb-3 font-weight-normal">Please input buyer's information</h1>
     <br/>
     <!-- #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)" -->

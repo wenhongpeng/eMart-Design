@@ -1,10 +1,30 @@
 import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from './../environments/environment';
+import {Buyer} from './models/buyer';
+import {Seller} from './models/seller';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignupService {
 
-constructor() { }
+  constructor(private http: HttpClient) { }
+
+  public get currentUserToken(): string {
+    return sessionStorage.getItem('token');
+  }
+
+  postBuyerSignUp(buyer) {
+    return this.http.post(`${environment.baseUrl}/buyerSignUp`, JSON.stringify(buyer), httpOptions);
+  }
+
+  postSellerSignUp(seller) {
+    return this.http.post(`${environment.baseUrl}/sellerSignUp`, JSON.stringify(seller), httpOptions);
+  }
 
 }
