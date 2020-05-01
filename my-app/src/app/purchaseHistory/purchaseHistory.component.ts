@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PurchaseHistoryService } from '../purchase-history.service';
 import { items } from '../items';
 
 @Component({
@@ -8,11 +10,29 @@ import { items } from '../items';
 })
 export class PurchaseHistoryComponent implements OnInit {
 
-  items = items;
+  items;
 
-  constructor() { }
+  constructor(private router: Router, private purchaseHistoryService:PurchaseHistoryService) { }
 
   ngOnInit() {
+  }
+
+  getPurchaseHistoryList() {
+  //     // this.purchaseHistoryService.postSignIn(value).subscribe(
+  //     //   data => {
+  //     //     console.log(JSON.stringify(data));
+  //     //     const info: any = data;
+  //     //     if (200 === info.code) {
+  //     //         console.log('Sign in success!');
+  //     //         sessionStorage.setItem('token', info.result.token)
+  //     //         this.router.navigate(['/products']);
+  //     //     } else {
+  //     //       console.log('Sign in ');
+  //     //       this.alerts.push({type : 'danger', message: 'username or password error!'});
+  //     //     }
+  //     //   }
+  //     // );
+    this.items = items;// dummy data
   }
 
 }

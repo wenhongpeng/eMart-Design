@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from './../environments/environment';
-import {Item} from './models/item';
+import {User} from './models/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -10,7 +10,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class ItemaddService {
+export class PurchaseHistoryService {
 
   constructor(private http: HttpClient) { }
 
@@ -18,16 +18,8 @@ export class ItemaddService {
     return sessionStorage.getItem('token');
   }
 
-  postItemAdd(item) {
-    return this.http.post(`${environment.baseUrl}/itemAdd`, JSON.stringify(item), httpOptions);
-  }
-
-  postViewStock(item) {
-    return this.http.post(`${environment.baseUrl}/viewStock`, JSON.stringify(item), httpOptions);
-  }
-
-  postReport(item) {
-    return this.http.post(`${environment.baseUrl}/report`, JSON.stringify(item), httpOptions);
+  postPurchaseHistory(user) {
+    return this.http.post(`${environment.baseUrl}/purchaseHistory`, JSON.stringify(user), httpOptions);
   }
 
 }

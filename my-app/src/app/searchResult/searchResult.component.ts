@@ -9,7 +9,7 @@ import { items } from '../items';
 })
 export class SearchResultComponent implements OnInit {
 
-  items = items;
+  items = items; // dummy data
 
   constructor() { }
 

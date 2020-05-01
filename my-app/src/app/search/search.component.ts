@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    let value = this.name.get('name');
+    let value = $("#inputItemname").val();
   //     // this.searchService.postItemList(value).subscribe(
   //     //   data => {
   //     //     console.log(JSON.stringify(data));

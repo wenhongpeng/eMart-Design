@@ -16,8 +16,8 @@ import { ItemAddComponent } from './itemAdd/itemAdd.component';
 import { ViewstockComponent } from './viewstock/viewstock.component';
 import { ReportComponent } from './report/report.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {JwtInterceptor} from './interceptor/jwt.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JwtInterceptor } from './interceptor/jwt.interceptor';
 
 @NgModule({
    declarations: [
