@@ -128,5 +128,7 @@
   
 	<modules>
 		<module>user_service</module>
+		<module>buyer_service</module>
+		<module>seller_service</module>
 	</modules>
 </project>
