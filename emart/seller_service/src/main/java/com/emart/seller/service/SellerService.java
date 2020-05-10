@@ -3,33 +3,18 @@
  */
 package com.emart.seller.service;
 
-import com.emart.seller.entity.Buyer;
-import com.emart.seller.entity.Seller;
+import com.emart.seller.entity.Items;
 
 /**
  * @author HongPengWen
  *
  */
 public interface SellerService {
-
 	
-	/**
-	 * Seller Login
-	 * 
-	 * @param userName
-	 * @param password
-	 * @return
-	 */
-	int findSeller(String userName, String password);
+	void saveItems(Items items);
 	
+	void deleteItems(Items items);
 	
-	/**
-	 * Seller signup
-	 * 
-	 * @param seller
-	 */
-	void saveSeller(Seller seller);
-	
-	
+	void deleteItems(int itemId);
 	
 }

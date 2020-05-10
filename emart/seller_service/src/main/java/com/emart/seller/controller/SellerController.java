@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.emart.seller.entity.Buyer;
-import com.emart.seller.entity.Seller;
+import com.emart.seller.entity.Items;
 import com.emart.seller.service.SellerService;
 
 @RestController
@@ -16,21 +15,11 @@ public class SellerController {
 	
 	@Autowired
 	private SellerService sellerService;
-
 	
-	
-	@PostMapping("buyerSignUp")
-	public String buyerSignUp(@RequestBody Buyer buyer) {
+	@PostMapping("addItems")
+	public String addItems(@RequestBody Items items) {
 		
-		sellerService.saveBuyer(buyer);
-		
-		return "SignUp Sucess";
-	}
-	
-	@PostMapping("sellerSignUp")
-	public String sellerSignUp(@RequestBody Seller seller) {
-		
-		sellerService.saveSeller(seller);
+		sellerService.saveItems(items);
 		
 		return "SignUp Sucess";
 	}

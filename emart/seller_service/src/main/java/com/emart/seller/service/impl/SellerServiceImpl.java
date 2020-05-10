@@ -1,12 +1,10 @@
 package com.emart.seller.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.emart.seller.dao.SellerDao;
-import com.emart.seller.entity.Seller;
+import com.emart.seller.entity.Items;
 import com.emart.seller.service.SellerService;
 
 /**
@@ -20,20 +18,23 @@ public class SellerServiceImpl implements SellerService {
 	private SellerDao sellerDao;
 
 	@Override
-	public int findSeller(String userName, String password) {
-		int num = 0;
-		List<Seller> list = sellerDao.findByUserNameAndPassword(userName, password);
-		if(list != null) {
-			num = 1;
-		}
+	public void saveItems(Items items) {
+
+		sellerDao.save(items);
 		
-		return num;
+	}
+	
+	@Override
+	public void deleteItems(Items items) {
+		
+		sellerDao.delete(items);
+		
 	}
 
 	@Override
-	public void saveSeller(Seller seller) {
+	public void deleteItems(int itemId) {
 
-		sellerDao.save(seller);
+		sellerDao.deleteById(itemId);
 		
 	}
 
