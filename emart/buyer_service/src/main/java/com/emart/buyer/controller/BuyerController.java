@@ -10,7 +10,7 @@ import com.emart.buyer.entity.Buyer;
 import com.emart.buyer.service.BuyerService;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/buyer")
 public class BuyerController {
 	
 	@Autowired

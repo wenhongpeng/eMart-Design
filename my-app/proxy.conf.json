@@ -1,0 +1,14 @@
+{
+  "/api/user": {
+	//
+    "target": "http://localhost:9001"
+  },
+  "/api/buyer": {
+	//
+    "target": "http://localhost:9002"
+  },
+  "/api/seller": {
+	//
+    "target": "http://localhost:9003"
+  }
+}
