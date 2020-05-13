@@ -3,8 +3,11 @@
  */
 package com.emart.buyer.service;
 
-import com.emart.buyer.entity.Buyer;
-import com.emart.buyer.entity.Seller;
+import java.util.List;
+
+import com.emart.buyer.entity.Items;
+import com.emart.buyer.entity.PurchaseHistory;
+import com.emart.buyer.exception.DataNotFoundException;
 
 /**
  * @author HongPengWen
@@ -13,19 +16,26 @@ import com.emart.buyer.entity.Seller;
 public interface BuyerService {
 
 	/**
-	 * Buyer Login
+	 * Search Items
 	 * 
 	 * @param userName
-	 * @param password
 	 * @return
 	 */
-	int findBuyer(String userName, String password);
+	List<Items> searchItems(String itemName) throws DataNotFoundException;
 	
 	/**
-	 * Buyer signup
+	 * Filter Items
 	 * 
 	 * @param buyer
 	 */
-	void saveBuyer(Buyer buyer);
+	List<Items> filterItems(String itemName, double fromPrice, double toPrice) throws DataNotFoundException;
+	
+	/**
+	 * Search Items
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	List<PurchaseHistory> searchPurchaseHistory(String buyerName) throws DataNotFoundException;
 	
 }

@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.emart.buyer.dao.BuyerDao;
-import com.emart.buyer.entity.Buyer;
+import com.emart.buyer.dao.ItemsDao;
+import com.emart.buyer.dao.PurchaseHistoryDao;
+import com.emart.buyer.entity.Items;
+import com.emart.buyer.entity.PurchaseHistory;
+import com.emart.buyer.exception.DataNotFoundException;
 import com.emart.buyer.service.BuyerService;
 
 /**
@@ -17,24 +20,26 @@ import com.emart.buyer.service.BuyerService;
 public class BuyerServiceImpl implements BuyerService {
 	
 	@Autowired
-	private BuyerDao buyerDao;
+	private ItemsDao itemsDao;
 	
+	@Autowired
+	private PurchaseHistoryDao purchaseHistoryDao;
+
 	@Override
-	public int findBuyer(String userName, String password) {
-		int num = 0;
-		List<Buyer> list = buyerDao.findByUserNameAndPassword(userName, password);
-		if(list != null) {
-			num = 1;
-		}
-		
-		return num;
+	public List<Items> searchItems(String itemName) throws DataNotFoundException {
+		return itemsDao.findAll(itemName);
 	}
 
 	@Override
-	public void saveBuyer(Buyer buyer) {
-
-		buyerDao.save(buyer);
+	public List<Items> filterItems(String itemName, double fromPrice, double toPrice) throws DataNotFoundException {
 		
+		return itemsDao.findAll(itemName, fromPrice, toPrice);
 	}
 
+	@Override
+	public List<PurchaseHistory> searchPurchaseHistory(String buyerName) throws DataNotFoundException {
+
+		return purchaseHistoryDao.findAll(buyerName);
+	}
+	
 }
