@@ -60,14 +60,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void saveBuyer(Buyer buyer) throws MasterValueNotFoundException{
+	public void saveBuyer(Buyer buyer) throws MasterValueNotFoundException {
 
 		buyerDao.save(buyer);
 		
 	}
 
 	@Override
-	public void saveSeller(Seller seller) throws MasterValueNotFoundException{
+	public void saveSeller(Seller seller) throws MasterValueNotFoundException {
 
 		sellerDao.save(seller);
 		

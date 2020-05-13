@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.emart.seller.dao.SellerDao;
 import com.emart.seller.entity.Items;
+import com.emart.seller.exception.DataNotFoundException;
+import com.emart.seller.exception.MasterValueNotFoundException;
 import com.emart.seller.service.SellerService;
 
 /**
@@ -18,24 +20,37 @@ public class SellerServiceImpl implements SellerService {
 	private SellerDao sellerDao;
 
 	@Override
-	public void saveItems(Items items) {
+	public void saveItems(Items items) throws MasterValueNotFoundException {
 
 		sellerDao.save(items);
 		
 	}
 	
 	@Override
-	public void deleteItems(Items items) {
+	public void deleteItems(Items items) throws MasterValueNotFoundException {
 		
 		sellerDao.delete(items);
 		
 	}
 
 	@Override
-	public void deleteItems(int itemId) {
+	public void deleteItems(int itemId) throws MasterValueNotFoundException {
 
 		sellerDao.deleteById(itemId);
 		
+	}
+
+	@Override
+	public void updateItemStock(int number, String itemName) throws MasterValueNotFoundException {
+
+		sellerDao.updateItemStock(number, itemName);
+		
+	}
+
+	@Override
+	public Items viewStock(String itemName) throws DataNotFoundException {
+
+		return sellerDao.viewStock(itemName);
 	}
 
 }
