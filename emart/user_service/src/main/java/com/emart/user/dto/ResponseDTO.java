@@ -10,5 +10,7 @@ public class ResponseDTO {
 
 	private String responseCode;
 	private String responseMessage;
+	
+	private String token;
 
 }
