@@ -4,14 +4,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.emart.buyer.dto.RequestDTO;
 import com.emart.buyer.dto.ResponseDTO;
+import com.emart.buyer.entity.Cart;
 import com.emart.buyer.entity.Items;
 import com.emart.buyer.entity.PurchaseHistory;
 import com.emart.buyer.exception.DataNotFoundException;
+import com.emart.buyer.exception.MasterValueNotFoundException;
 import com.emart.buyer.service.BuyerService;
 
 @RestController
@@ -70,6 +74,58 @@ public class BuyerController {
 		} catch (DataNotFoundException e) {
 			response.setResponseCode(ResponseDTO.REST_API_RESPONSE_CODE_ERROR);
 			response.setResponseMessage("Search Purchase History Fail!!!");
+		}
+
+		return response;
+	}
+	
+	@PostMapping("addCartItems")
+	public ResponseDTO addCartItems(@RequestParam Cart cart) {
+		
+		ResponseDTO response = new ResponseDTO();
+		try {
+			buyerService.addCartItems(cart);
+
+			response.setResponseCode(ResponseDTO.REST_API_RESPONSE_CODE_SUCCESS);
+			response.setResponseMessage("Add Cart Items Success!!!");
+		} catch (MasterValueNotFoundException e) {
+			response.setResponseCode(ResponseDTO.REST_API_RESPONSE_CODE_ERROR);
+			response.setResponseMessage("Add Cart Items Fail!!!");
+		}
+
+		return response;
+	}
+	
+	@PostMapping("deleteCartItems")
+	public ResponseDTO deleteCartItems(@RequestParam Cart cart) {
+		
+		ResponseDTO response = new ResponseDTO();
+		try {
+			buyerService.deleteCartItems(cart);
+
+			response.setResponseCode(ResponseDTO.REST_API_RESPONSE_CODE_SUCCESS);
+			response.setResponseMessage("Delete Cart Items Success!!!");
+		} catch (MasterValueNotFoundException e) {
+			response.setResponseCode(ResponseDTO.REST_API_RESPONSE_CODE_ERROR);
+			response.setResponseMessage("Delete Cart Items Fail!!!");
+		}
+
+		return response;
+	}
+	
+	@PostMapping("checkout")
+	public ResponseDTO checkout(@RequestBody RequestDTO request) {
+		
+		ResponseDTO response = new ResponseDTO();
+		try {
+			double totalPrice = buyerService.checkout(request.getCartList());
+
+			response.setTotalPrice(totalPrice);
+			response.setResponseCode(ResponseDTO.REST_API_RESPONSE_CODE_SUCCESS);
+			response.setResponseMessage("Checkout Success!!!");
+		} catch (MasterValueNotFoundException e) {
+			response.setResponseCode(ResponseDTO.REST_API_RESPONSE_CODE_ERROR);
+			response.setResponseMessage("Checkout Fail!!!");
 		}
 
 		return response;

@@ -82,10 +82,15 @@ description VARCHAR(200) NOT NULL,
 PRIMARY KEY (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-
-
-
-
-
+CREATE TABLE cart(
+id INT NOT NULL AUTO_INCREMENT,
+buyer_id INT NOT NULL,
+seller_id INT NOT NULL,
+transaction_id INT NOT NULL,
+item_id INT NOT NULL,
+price double NOT NULL,
+number_of_items INT NOT NULL,
+date_time DATE,
+remarks VARCHAR(200) NOT NULL,
+PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

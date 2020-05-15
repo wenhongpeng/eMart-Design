@@ -22,5 +22,5 @@ public class ResponseDTO {
 	
 	private List<PurchaseHistory> purchaseHistoryList;
 	
-
+	private double totalPrice;
 }
