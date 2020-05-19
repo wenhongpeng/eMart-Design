@@ -12,6 +12,12 @@ spring:
     database: MYSQL
     show-sql: true
     open-in-view: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
 
 ##jwt配置
 audience:
