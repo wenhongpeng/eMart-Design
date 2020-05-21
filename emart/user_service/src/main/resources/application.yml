@@ -2,7 +2,7 @@ server:
   port: 9001
 spring:
   application:
-    name: emart-service-user
+    name: emart-user-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.99.100:3307/emart

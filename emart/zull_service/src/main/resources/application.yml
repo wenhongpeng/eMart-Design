@@ -2,7 +2,7 @@ server:
    port: 5555
 spring:
    application:
-      name: cloud-zuul-service
+      name: emart-zuul-service
 ribbon:  
    ReadTimeout: 30000
    ConnectTimeout: 30000
@@ -15,8 +15,9 @@ zuul:
       connect-timeout-millis: 30000
       socket-timeout-millis: 30000
    routes:
-      cloud-user-service: /cloud-user-service/**   #重启机器后要多等一段时间才访问，注册要有三次心跳后才注册成功
-      cloud-auth-service: /cloud-auth-service/**
+      emart-user-service: /emart-user-service/**   #重启机器后要多等一段时间才访问，注册要有三次心跳后才注册成功
+      emart-buyer-service: /emart-buyer-service/**
+      emart-seller-service: /emart-seller-service/**
 #      user-service:   #静态路由
 #         path: /cloud-simple-service/**
 #         url: http://localhost:8081/

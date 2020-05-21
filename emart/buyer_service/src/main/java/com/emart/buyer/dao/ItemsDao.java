@@ -18,6 +18,7 @@ import com.emart.buyer.entity.Items;
  */
 public interface ItemsDao extends JpaRepository<Items, Integer>, JpaSpecificationExecutor<Items> {
 
+	@Query(nativeQuery = true, value = "SELECT * FROM items WHERE item_name like %:itemName% ")
 	List<Items> findAll(@Param("itemName") String itemName);
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM items WHERE item_name = :itemName AND price >= :fromPrice AND price <= :toPrice ")
