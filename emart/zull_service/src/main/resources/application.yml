@@ -7,7 +7,7 @@ ribbon:
    ReadTimeout: 30000
    ConnectTimeout: 30000
 zuul:
-   sensitiveHeaders: Access-Control-Allow-Origin,Cookie,Set-Cookie  #配置头部黑名单，它包含Zuul不会传播到下游服务的敏感头部。同时意识着Authorization将被放行
+   sensitiveHeaders: Access-Control-Allow-Origin,Cookie,Set-Cookie
    ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
    ignored-services: '*'
    prefix: /api
@@ -15,13 +15,9 @@ zuul:
       connect-timeout-millis: 30000
       socket-timeout-millis: 30000
    routes:
-      emart-user-service: /emart-user-service/**   #重启机器后要多等一段时间才访问，注册要有三次心跳后才注册成功
+      emart-user-service: /emart-user-service/**
       emart-buyer-service: /emart-buyer-service/**
       emart-seller-service: /emart-seller-service/**
-#      user-service:   #静态路由
-#         path: /cloud-simple-service/**
-#         url: http://localhost:8081/
-   #添加代理头
    add-proxy-headers: true
 hystrix:
    command:
