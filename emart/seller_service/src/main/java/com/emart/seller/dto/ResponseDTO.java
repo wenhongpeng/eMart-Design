@@ -1,5 +1,7 @@
 package com.emart.seller.dto;
 
+import com.emart.seller.entity.Items;
+
 import lombok.Data;
 
 @Data
@@ -12,5 +14,7 @@ public class ResponseDTO {
 	private String responseMessage;
 	
 	private String token;
+	
+	private Items items;
 
 }

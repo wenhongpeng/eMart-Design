@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from './../environments/environment';
 import {User} from './models/user';
+import { userInfo } from 'os';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,8 +19,13 @@ export class PurchaseHistoryService {
     return sessionStorage.getItem('token');
   }
 
-  postPurchaseHistory(user) {
-    return this.http.post(`${environment.baseUrl}/purchaseHistory`, JSON.stringify(user), httpOptions);
+  postPurchaseHistory() {
+
+    var inputData = {};
+
+    inputData["userName"] = sessionStorage.getItem('userName');
+    inputData["password"] = sessionStorage.getItem('password');
+    return this.http.post(`${environment.baseUrl}/emart-buyer-service/api/buyer/searchpurchaseHistory`, JSON.stringify(inputData), httpOptions);
   }
 
 }

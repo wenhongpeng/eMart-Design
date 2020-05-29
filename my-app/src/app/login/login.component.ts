@@ -26,20 +26,22 @@ export class LoginComponent implements OnInit {
 
   onSubmit(value: any) {
     if (this.validInput(value)) {
-  //     // this.userService.postSignIn(value).subscribe(
-  //     //   data => {
-  //     //     console.log(JSON.stringify(data));
-  //     //     const info: any = data;
-  //     //     if (200 === info.code) {
-  //     //         console.log('Sign in success!');
-  //     //         sessionStorage.setItem('token', info.result.token)
-  //     //         this.router.navigate(['/products']);
-  //     //     } else {
-  //     //       console.log('Sign in ');
-  //     //       this.alerts.push({type : 'danger', message: 'username or password error!'});
-  //     //     }
-  //     //   }
-  //     // );
+      this.userService.postSignIn(value).subscribe(
+        data => {
+          console.log(JSON.stringify(data));
+          const info: any = data;
+          if (200 === info.code) {
+              console.log('Sign in success!');
+              sessionStorage.setItem('token', info.result.token);
+              sessionStorage.setItem('userName', value.name);
+              sessionStorage.setItem('password', value.password);
+              this.router.navigate(['/products']);
+          } else {
+            console.log('Sign in ');
+            this.alerts.push({type : 'danger', message: 'username or password error!'});
+          }
+        }
+      );
       console.log('Sign In Success');
       if (value.userType == '1') {
         this.router.navigate(['/search']);

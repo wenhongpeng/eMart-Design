@@ -20,11 +20,11 @@ export class SignupService {
   }
 
   postBuyerSignUp(buyer) {
-    return this.http.post(`${environment.baseUrl}/buyerSignUp`, JSON.stringify(buyer), httpOptions);
+    return this.http.post(`${environment.baseUrl}/emart-user-service/api/user/buyerSignUp`, JSON.stringify(buyer), httpOptions);
   }
 
   postSellerSignUp(seller) {
-    return this.http.post(`${environment.baseUrl}/sellerSignUp`, JSON.stringify(seller), httpOptions);
+    return this.http.post(`${environment.baseUrl}/emart-user-service/api/user/sellerSignUp`, JSON.stringify(seller), httpOptions);
   }
 
 }

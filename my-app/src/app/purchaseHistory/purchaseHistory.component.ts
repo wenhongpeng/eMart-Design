@@ -18,20 +18,19 @@ export class PurchaseHistoryComponent implements OnInit {
   }
 
   getPurchaseHistoryList() {
-  //     // this.purchaseHistoryService.postSignIn(value).subscribe(
-  //     //   data => {
-  //     //     console.log(JSON.stringify(data));
-  //     //     const info: any = data;
-  //     //     if (200 === info.code) {
-  //     //         console.log('Sign in success!');
-  //     //         sessionStorage.setItem('token', info.result.token)
-  //     //         this.router.navigate(['/products']);
-  //     //     } else {
-  //     //       console.log('Sign in ');
-  //     //       this.alerts.push({type : 'danger', message: 'username or password error!'});
-  //     //     }
-  //     //   }
-  //     // );
+      this.purchaseHistoryService.postPurchaseHistory().subscribe(
+        data => {
+          console.log(JSON.stringify(data));
+          const info: any = data;
+          if (200 === info.code) {
+              console.log('Sign in success!');
+              sessionStorage.setItem('token', info.result.token)
+              this.router.navigate(['/products']);
+          } else {
+            console.log('Sign in ');
+          }
+        }
+      );
     this.items = items;// dummy data
   }
 

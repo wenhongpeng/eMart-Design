@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="buyer")
-public class Buyer {
+public class Buyer extends User {
 
 	@Id
 	private int id;

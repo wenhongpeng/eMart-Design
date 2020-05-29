@@ -12,6 +12,7 @@ import com.emart.user.dto.ResponseDTO;
 import com.emart.user.entity.Audience;
 import com.emart.user.entity.Buyer;
 import com.emart.user.entity.Seller;
+import com.emart.user.entity.User;
 import com.emart.user.exception.LoginException;
 import com.emart.user.exception.MasterValueNotFoundException;
 import com.emart.user.service.UserService;
@@ -29,6 +30,19 @@ public class UserController {
     
 	@Autowired
 	private UserService userService;
+	
+	@PostMapping("signin")
+	public ResponseDTO authenticate(@RequestBody User user) {
+		ResponseDTO response = new ResponseDTO();
+		
+		if ("1".equals(user.getUserType())) {
+			response = authenticateOfBuyer((Buyer) user);
+		} else {
+			response = authenticateOfSeller((Seller) user);
+		}
+		
+		return response;
+	}
 	
 	@PostMapping("buyerSignin")
 	public ResponseDTO authenticateOfBuyer(@RequestBody Buyer buyer) {
@@ -57,17 +71,17 @@ public class UserController {
 	}
 	
 	@PostMapping("sellerSignin")
-	public ResponseDTO authenticateOfSeller(@RequestBody Buyer buyer) {
+	public ResponseDTO authenticateOfSeller(@RequestBody Seller seller) {
 		
 		ResponseDTO response = new ResponseDTO();
 
 		try {
-			userService.findSeller(buyer.getUserName(), buyer.getPassword());
+			userService.findSeller(seller.getUserName(), seller.getPassword());
 	        // 这里模拟测试, 默认登录成功，返回用户ID和角色信息
 	        String userId = UUID.randomUUID().toString();
 	        String role = "admin";
 	        // 创建token
-	        String token = JwtTokenUtil.createJWT(userId, buyer.getUserName(), role, audience);
+	        String token = JwtTokenUtil.createJWT(userId, seller.getUserName(), role, audience);
 	        log.info("### Signin Success, token={} ###", token);
 	        
 			response.setToken(token);

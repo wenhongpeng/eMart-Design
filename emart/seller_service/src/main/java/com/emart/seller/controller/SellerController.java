@@ -75,8 +75,9 @@ public class SellerController {
 		
 		ResponseDTO response = new ResponseDTO();
 		try {
-			sellerService.viewStock(items.getItemName());
+			Items result = sellerService.viewStock(items.getItemName());
 
+			response.setItems(result);
 			response.setResponseCode(ResponseDTO.REST_API_RESPONSE_CODE_SUCCESS);
 			response.setResponseMessage("View Item Stock Success!!!");
 		} catch (DataNotFoundException e) {

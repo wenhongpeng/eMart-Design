@@ -18,7 +18,7 @@ export class SearchService {
   }
 
   postItemList(itemName) {
-    return this.http.post(`${environment.baseUrl}/search`, JSON.stringify(itemName), httpOptions);
+    return this.http.post(`${environment.baseUrl}/emart-buyer-service/api/buyer/searchItems`, JSON.stringify(itemName), httpOptions);
   }
 
 }

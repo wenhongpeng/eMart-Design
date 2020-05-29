@@ -19,15 +19,15 @@ export class ItemaddService {
   }
 
   postItemAdd(item) {
-    return this.http.post(`${environment.baseUrl}/itemAdd`, JSON.stringify(item), httpOptions);
+    return this.http.post(`${environment.baseUrl}/emart-seller-service/api/seller/addItems`, JSON.stringify(item), httpOptions);
   }
 
   postViewStock(item) {
-    return this.http.post(`${environment.baseUrl}/viewStock`, JSON.stringify(item), httpOptions);
+    return this.http.post(`${environment.baseUrl}/emart-seller-service/api/seller/viewStock`, JSON.stringify(item), httpOptions);
   }
 
   postReport(item) {
-    return this.http.post(`${environment.baseUrl}/report`, JSON.stringify(item), httpOptions);
+    return this.http.post(`${environment.baseUrl}/emart-seller-service/api/seller/report`, JSON.stringify(item), httpOptions);
   }
 
 }

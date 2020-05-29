@@ -16,23 +16,20 @@ export class ViewstockComponent implements OnInit {
   }
 
   onSubmit(value: any) {
-    // if (this.validInput(value)) {
-  //     // this.itemaddService.postViewStock(value).subscribe(
-  //     //   data => {
-  //     //     console.log(JSON.stringify(data));
-  //     //     const info: any = data;
-  //     //     if (200 === info.code) {
-  //     //         console.log('Sign in success!');
-                    // $("#noOfStockItems").val(data.noOfStockItems);
-                    // $("#noOfSoldItems").val(data.noOfSoldItems);
-  //     //     } else {
-  //     //       console.log('Sign in ');
-  //     //       this.alerts.push({type : 'danger', message: 'username or password error!'});
-  //     //     }
-  //     //   }
-  //     // );
+       this.itemaddService.postViewStock(value).subscribe(
+         data => {
+           console.log(JSON.stringify(data));
+           const info: any = data;
+           if (200 === info.code) {
+              console.log('Item Add Success!');
+              $("#noOfStockItems").val(data.items.stockNumber);
+              // $("#noOfSoldItems").val(data.items.stockNumber);
+           } else {
+             console.log('Item Add');
+           }
+         }
+       );
       console.log('Item Add Success');
-  // }
-  }
+   }
 
 }
