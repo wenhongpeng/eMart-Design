@@ -1,22 +1,25 @@
 node {
    stage('git clone') { // for display purposes
-     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'gitlab', url: 'https://github.com/wenhongpeng/eMart-Design/emart.git']]])
+     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'gitlab', url: 'https://github.com/wenhongpeng/eMart-Design/tree/master/emart/eureka_server']]])
    }
    stage('Build') {
-           //env.JAVA_HOME="${tool 'jdk1.8.0_231'}"
            withMaven(
             maven: 'maven',
             mavenLocalRepo: '.repository') {
                 sh "mvn clean install -Dmaven.test.skip=true"
         }
    }
+   stage('Prepare Dockerfile') {
+	 sh 'cp /tmp/Dockerfile .' 
+   }
    stage('deploy') {
     sshagent(credentials: ['deploy_ssh_key']) {
         sh 'ssh root@192.168.99.100'
-        sh 'docker run -d -p 8080:8080 -v /home/data:/webapps --name search tomcat:9.0'
-        sh 'echo hello'
-       
-        //sh 'scp producer/target/salesApp-1.0-RELEASES.jar  root@120.xx.95.105:/root/deploy/'
+		sh 'docker build -t repos_local/tomcat7_jre18'
+        sh 'docker run -d -p 8080:8080 --name tomcat7 repos_local/tomcat7_jre18'
+		sh 'docker cp emart-1.0-RELEASES.jar root@192.168.99.100:/docker_home/local/tomcat7/webapps'
+		sh 'docker restart tomcat7'
+		
      }
    }
 }
