@@ -1,25 +1,49 @@
-node {
-   stage('git clone') { // for display purposes
-     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'gitlab', url: 'https://github.com/wenhongpeng/eMart-Design/tree/master/emart/eureka_server']]])
+pipeline {
+    agent any
+   tools {
+      // Install the Maven version configured as ÅgM3Åh and add it to the path.
+      maven 'maven'
    }
-   stage('Build') {
-           withMaven(
-            maven: 'maven',
-            mavenLocalRepo: '.repository') {
-                sh "mvn clean install -Dmaven.test.skip=true"
+   stages {
+        stage('git clone') {
+            steps {
+		        sh 'cd /var/jenkins_home/workspace/emart_jenkins/'
+                sh 'mkdir -p Module1'
+                dir("Module1){
+                    git branch: "master",
+                    credentialsId: 'gitlab',
+                    url: 'https://github.com/wenhongpeng/emart.git'
+                }
+                sh 'ls -al Module1'
+            }
+        }
+     stage('Build') {
+         steps {
+            sh "mvn -f /var/jenkins_home/workspace/emart_jenkins/Module1/eureka_server/pom.xml"
+         }
+      }
+        stage('Deploy') {
+            agent {
+                dockerfile {
+                    filename 'Dockerfile'
+                    dir '/var/jenkins_home/workspace/emart_jenkins/Module1/eureka_server/target'
+                    additionalBuildArgs  '--tag eureka_server:v1.0'
+             }
+            }
+            steps {
+               echo 'Deploy OK'
+            }
+        }
+        stage('startup') {
+            agent  any
+            steps {
+               sh 'docker run --name eureka-service -d -p 8761:8761  eureka_server:v1.0'
+            }
         }
    }
-   stage('Prepare Dockerfile') {
-	 sh 'cp /tmp/Dockerfile .' 
-   }
-   stage('deploy') {
-    sshagent(credentials: ['deploy_ssh_key']) {
-        sh 'ssh root@192.168.99.100'
-		sh 'docker build -t repos_local/tomcat7_jre18'
-        sh 'docker run -d -p 8080:8080 --name tomcat7 repos_local/tomcat7_jre18'
-		sh 'docker cp emart-1.0-RELEASES.jar root@192.168.99.100:/docker_home/local/tomcat7/webapps'
-		sh 'docker restart tomcat7'
-		
-     }
-   }
+    post {
+        failure {
+           echo 'pipline failue'
+        }
+    }
 }
