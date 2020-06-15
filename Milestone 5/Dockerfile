@@ -1,13 +1,8 @@
-FROM centos
+From java:openjdk-8
 
-RUN mkdir -p /docker_home/local
+MAINTAINER wenhongpeng
 
-ADD tomcat7 /docker_home/local/tomcat7
-ADD java18 /docker_home/local/java18
-ENV JAVA_HOME /docker_home/local/java18/
-ENV CATALINA_HOME /docker_home/local/tomcat7
-ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin
+ADD ./eureka_server-0.0.1-SNAPSHOT.jar /home/eureka_server-0.0.1-SNAPSHOT.jar
 
 EXPOSE 8080
-
-CMD ["/docker_home/local/tomcat7/bin/catalina.sh","run"]
+ENTRYPOINT ["java","-jar","/home/eureka_server-0.0.1-SNAPSHOT.jar"]
